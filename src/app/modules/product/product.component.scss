@@ -1,0 +1,16 @@
+@import '../../../variables.scss';
+
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+.productPrice {
+    font-size: 30px;
+    font-weight: 500;
+    color: $warn;
+}
+
+mat-card {
+    margin-bottom: 25px;
+}
