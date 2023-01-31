@@ -23,9 +23,9 @@ export class ProductComponent {
     this.getProducts(event.pageIndex, event.pageSize);   
   }
   
-  private getProducts(page: number, size: number) {
-    this.productService.getProducts(page, size)
-      .subscribe(page => this.page = page);   
+  private getProducts(pageNumber: number, pageSize: number) {
+    this.productService.getProducts(pageNumber, pageSize)
+      .subscribe(dataSource => this.page = dataSource);   
   }
   
 }
