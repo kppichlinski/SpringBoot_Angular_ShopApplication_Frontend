@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { map, startWith, switchMap } from 'rxjs';
+import { startWith, switchMap } from 'rxjs';
 import { AdminProductService } from './admin-product.service';
 import { AdminProduct } from './model/admin-product';
 
@@ -12,7 +12,7 @@ import { AdminProduct } from './model/admin-product';
 export class AdminProductComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) pagiator!: MatPaginator;
-  displayedColumns: string[] = ["id", "name", "price"];
+  displayedColumns: string[] = ["id", "name", "price", "actions"];
   totalElements: number = 0;
   dataSource: AdminProduct[] = [];
 
