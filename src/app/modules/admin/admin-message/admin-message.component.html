@@ -1,0 +1,10 @@
+<div class="messages" fxLayout="row" *ngIf="messages.length > 0" fxLayoutAlign="end start">
+    <div fxFlex>
+        <div *ngFor="let message of messages">{{message}}</div>
+    </div>
+    <div>
+        <button mat-icon-button class="clearMessages" (click)="clearMessages()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</div>
