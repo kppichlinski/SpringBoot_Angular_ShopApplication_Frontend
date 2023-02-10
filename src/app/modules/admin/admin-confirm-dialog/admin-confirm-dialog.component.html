@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutGap="50px">
+    <div fxLayout="row">
+        <div mat-dialog-content fxLayout="row">
+            <span>{{data.message}}</span>
+        </div>
+        <div>
+            <button mat-icon-button [mat-dialog-close]="false">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div mat-dialog-actions fxFlex>
+        <button mat-raised-button fxFlex [mat-dialog-close]="false">No</button>
+        <button mat-raised-button color="warn" fxFlex [mat-dialog-close]="true">Yes</button>
+    </div>
+</div>
