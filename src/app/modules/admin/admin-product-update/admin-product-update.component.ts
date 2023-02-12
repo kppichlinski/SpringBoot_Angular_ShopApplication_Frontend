@@ -15,6 +15,9 @@ export class AdminProductUpdateComponent {
 
   product!: AdminProductUpdate;
   productForm!: FormGroup;
+  requiredFileTypes = "image/jpeg, image/png";
+  imageForm!: FormGroup;
+  image: string | null = null;
 
   constructor(
     private router: ActivatedRoute,
@@ -31,8 +34,12 @@ export class AdminProductUpdateComponent {
       description: ['', [Validators.required, Validators.minLength(4)]],
       category: ['', [Validators.required, Validators.minLength(4)]],
       price: ['', [Validators.required, Validators.min(0)]],
-      currency: ['PLN', Validators.required]
-    })
+      currency: ['PLN', Validators.required],
+    });
+
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    });
   }
 
   getProduct() {
@@ -43,7 +50,14 @@ export class AdminProductUpdateComponent {
 
   submit() {
     let id = Number(this.router.snapshot.params['id']);
-    this.adminProductUpdateService.savePost(id, this.productForm.value as AdminProductUpdate)
+    this.adminProductUpdateService.savePost(id, {
+      name: this.productForm.get('name')?.value,
+      description: this.productForm.get('description')?.value,
+      category: this.productForm.get('category')?.value,
+      price: this.productForm.get('price')?.value,
+      currency: this.productForm.get('currency')?.value,
+      image: this.image
+    } as AdminProductUpdate)
       .subscribe({
         next: product => {
           this.mapFormValues(product);
@@ -53,13 +67,29 @@ export class AdminProductUpdateComponent {
       });
   }
 
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.adminProductUpdateService.uploadImage(formData)
+      .subscribe(result => this.image = result.filename);
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      });
+    }
+  }
+
   private mapFormValues(product: AdminProductUpdate): void {
-    return this.productForm.setValue({
+    this.productForm.setValue({
       name: product.name,
       category: product.category,
       description: product.description,
       price: product.price,
       currency: product.currency
-    })
+    });
+    this.image = product.image;
   }
 }
