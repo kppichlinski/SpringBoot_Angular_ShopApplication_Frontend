@@ -19,6 +19,19 @@ import { FormGroup } from "@angular/forms";
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Friendly URL</mat-label>
+            <input matInput placeholder="Freindly URL" formControlName="slug">
+            <div *ngIf="slug?.invalid && (slug?.dirty || slug?.touched)" class="errorMessages">
+                <div *ngIf="slug?.errors?.['required']">
+                    Slug is required
+                </div>
+                <div *ngIf="slug?.errors?.['minlength']">
+                    Slug has to have at least 4 signs
+                </div>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Description</mat-label>
             <textarea matInput rows="20" placeholder="Product description" formControlName="description"></textarea>
             <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="errorMessages">
@@ -100,5 +113,9 @@ export class AdminProductFormComponent {
 
     get currency() {
         return this.parentForm.get("currency");
+    }
+
+    get slug() {
+        return this.parentForm.get("slug");
     }
 }

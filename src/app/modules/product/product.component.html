@@ -3,11 +3,16 @@
     <div flexLayout="row">
         <div flexLayout="column" fxFlex>
             <mat-card-header>
-                <mat-card-title>{{product.name}}</mat-card-title>
+                <mat-card-title>
+                    <a routerLink="{{'/products/' + product.slug}}">{{product.name}}</a>
+                </mat-card-title>
                 <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
             </mat-card-header>
             <div class="cardElementsPadding" flexLayout="row">
-                <img mat-card-image src="/assets/image-placeholder.png" mat-card-lg-image>
+                <a routerLink="{{'/products/' + product.slug}}">
+                    <img mat-card-image *ngIf="!product?.image" src="/assets/image-placeholder.png" mat-card-lg-image>
+                    <img mat-card-image *ngIf="product?.image" src="{{'/api/data/productImage/' + product?.image}}" mat-card-lg-image>
+                </a>
                 <mat-card-content fxFlex>{{product.description}}</mat-card-content>
             </div>
         </div>
@@ -16,7 +21,7 @@
         </div>
     </div>
     <mat-card-actions align="end" fxLayoutGap="10">
-        <button mat-flat-button color="accent">Pokaż</button>
+        <button mat-flat-button color="accent" routerLink="{{'/products/' + product.slug}}">Pokaż</button>
         <button mat-flat-button color="primary">Do koszyka</button>
     </mat-card-actions>
 </mat-card>
