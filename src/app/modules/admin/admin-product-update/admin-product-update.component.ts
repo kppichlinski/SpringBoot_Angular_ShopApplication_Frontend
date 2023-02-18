@@ -32,6 +32,7 @@ export class AdminProductUpdateComponent {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required, Validators.minLength(4)]],
+      fullDescription: [''],
       category: ['', [Validators.required, Validators.minLength(4)]],
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required],
@@ -54,6 +55,7 @@ export class AdminProductUpdateComponent {
     this.adminProductUpdateService.savePost(id, {
       name: this.productForm.get('name')?.value,
       description: this.productForm.get('description')?.value,
+      fullDescription: this.productForm.get('fullDescription')?.value,
       category: this.productForm.get('category')?.value,
       price: this.productForm.get('price')?.value,
       currency: this.productForm.get('currency')?.value,
@@ -89,6 +91,7 @@ export class AdminProductUpdateComponent {
       name: product.name,
       category: product.category,
       description: product.description,
+      fullDescription: product.fullDescription,
       price: product.price,
       currency: product.currency,
       slug: product.slug

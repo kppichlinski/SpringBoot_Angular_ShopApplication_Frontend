@@ -45,6 +45,16 @@ import { FormGroup } from "@angular/forms";
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Full description</mat-label>
+            <textarea matInput rows="20" placeholder="Full description" formControlName="fullDescription"></textarea>
+            <div *ngIf="fullDescription?.invalid && (fullDescription?.dirty || fullDescription?.touched)" class="errorMessages">
+                <div *ngIf="fullDescription?.errors?.['minlength']">
+                    Full description has to have at least 4 signs
+                </div>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Category</mat-label>
             <input matInput placeholder="Product category" formControlName="category">
             <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="errorMessages">
@@ -117,5 +127,9 @@ export class AdminProductFormComponent {
 
     get slug() {
         return this.parentForm.get("slug");
+    }
+
+    get fullDescription() {
+        return this.parentForm.get("fullDescription");
     }
 }

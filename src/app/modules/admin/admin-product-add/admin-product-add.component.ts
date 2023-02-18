@@ -14,6 +14,9 @@ import { AdminProductAddService } from './admin-product-add.service';
 export class AdminProductAddComponent implements OnInit {
 
   productForm!: FormGroup;
+  requiredFileTypes = "image/jpeg, image/png";
+  imageForm!: FormGroup;
+  image: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,15 +30,44 @@ export class AdminProductAddComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required, Validators.minLength(4)]],
+      fullDescription: [''],
       category: ['', [Validators.required, Validators.minLength(4)]],
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required],
       slug : ['', [Validators.required, Validators.minLength(4)]]
-    })
+    });
+
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    });
+  }
+
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.adminProductAddService.uploadImage(formData)
+      .subscribe(result => this.image = result.filename);
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      });
+    }
   }
 
   submit() {
-    this.adminProductAddService.saveNewProduct(this.productForm.value as AdminProductUpdate)
+    this.adminProductAddService.saveNewProduct({
+      name: this.productForm.get('name')?.value,
+      description: this.productForm.get('description')?.value,
+      fullDescription: this.productForm.get('fullDescription')?.value,
+      category: this.productForm.get('category')?.value,
+      price: this.productForm.get('price')?.value,
+      currency: this.productForm.get('currency')?.value,
+      image: this.image,
+      slug: this.productForm.get('slug')?.value
+    } as AdminProductUpdate)
       .subscribe({
         next: product => {
           this.router.navigate(["/admin/products/update", product.id])
@@ -44,5 +76,4 @@ export class AdminProductAddComponent implements OnInit {
         error: err => this.adminMessageService.addSpringErrors(err.error)
       });
   }
-
 }
