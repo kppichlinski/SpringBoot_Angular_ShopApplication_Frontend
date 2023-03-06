@@ -33,7 +33,7 @@ export class AdminProductUpdateComponent {
       name: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required, Validators.minLength(4)]],
       fullDescription: [''],
-      category: ['', [Validators.required, Validators.minLength(4)]],
+      category: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required],
       slug : ['', [Validators.required, Validators.minLength(4)]]
@@ -56,7 +56,7 @@ export class AdminProductUpdateComponent {
       name: this.productForm.get('name')?.value,
       description: this.productForm.get('description')?.value,
       fullDescription: this.productForm.get('fullDescription')?.value,
-      category: this.productForm.get('category')?.value,
+      categoryId: this.productForm.get('category')?.value,
       price: this.productForm.get('price')?.value,
       currency: this.productForm.get('currency')?.value,
       image: this.image,
@@ -89,7 +89,7 @@ export class AdminProductUpdateComponent {
   private mapFormValues(product: AdminProductUpdate): void {
     this.productForm.setValue({
       name: product.name,
-      category: product.category,
+      category: product.categoryId,
       description: product.description,
       fullDescription: product.fullDescription,
       price: product.price,
