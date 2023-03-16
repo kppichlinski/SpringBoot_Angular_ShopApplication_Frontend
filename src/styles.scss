@@ -16,3 +16,9 @@ html {
 .cardElementsPadding {
     padding: 16px 16px 0;
 }
+
+.mat-mdc-snack-bar-container {
+    &.snack-bar-bg-color-ok {
+      --mdc-snackbar-container-color: #009900;
+    }
+  }

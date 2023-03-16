@@ -10,13 +10,57 @@
             <div class="description">
                 {{product?.description}}
             </div>
-            <div class="description">
-                {{product?.fullDescription}}
-            </div>
             <div fxLayout="row" fxFlexAlign="end">
             </div>
                 <span class="price">{{product?.price}} {{product?.currency}}</span>
             <button mat-flat-button color="warn">Add to cart</button>
         </div>
+    </div>
+    <div class="description">
+        {{product?.fullDescription}}
+    </div>
+    <div>
+        <h2>Product reviews</h2>
+        <div>
+            <div *ngFor="let review of product?.reviews" class="review">
+                <div>Author: {{review.authorName}}</div>
+                <div>Content: {{review.content}}</div>
+            </div>
+        </div>
+        <form [formGroup]="reviewForm" (submit)="submit()" fxLayout="column">
+            <mat-form-field appearance="fill">
+                <mat-label>Author</mat-label>
+                <input matInput placeholder="Your name" formControlName="authorName">
+                <div *ngIf="authorName?.invalid && (authorName?.dirty || authorName?.touched)" class="errorMessage">
+                  <div *ngIf="authorName?.errors?.['required']">
+                    Name is required
+                  </div>
+                  <div *ngIf="authorName?.errors?.['minlength']">
+                    Name has to have 2 signs minimum
+                  </div>
+                  <div *ngIf="authorName?.errors?.['maxlength']">
+                    Name can have 60 signs maxmimum
+                  </div>
+                </div>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Your opinion</mat-label>
+                <textarea matInput rows="10" placeholder="Review" formControlName="content"></textarea>
+                <div *ngIf="content?.invalid && (content?.dirty || content?.touched)" class="errorMessage">
+                  <div *ngIf="content?.errors?.['required']">
+                    Review is required
+                  </div>
+                  <div *ngIf="content?.errors?.['minlength']">
+                    Review has to have 2 signs minimum
+                  </div>
+                  <div *ngIf="content?.errors?.['maxlength']">
+                    Review can have 600 signs maxmimum
+                  </div>
+                </div>
+            </mat-form-field>
+            <div fxLayout="colum" fxFlexAlign="end" fxLayoutGap="10">
+                <button mat-flat-button color="primary" [disabled]="!reviewForm.valid">Save</button>
+            </div>
+        </form>
     </div>
 </div>
