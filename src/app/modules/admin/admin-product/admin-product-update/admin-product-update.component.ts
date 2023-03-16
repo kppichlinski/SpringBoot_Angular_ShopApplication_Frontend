@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { AdminMessageService } from '../admin-message.service';
+import { AdminMessageService } from '../../common/service/admin-message.service';
+import { AdminProductImageService } from '../admin-product-image.service';
+import { AdminProductUpdate } from '../model/adminProductUpdate';
 import { AdminProductUpdateService } from './admin-product-update.service';
-import { AdminProductUpdate } from './model/admin-product-update';
 
 @Component({
   selector: 'app-admin-product-update',
@@ -24,7 +25,8 @@ export class AdminProductUpdateComponent {
     private adminProductUpdateService: AdminProductUpdateService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private adminMessageService: AdminMessageService
+    private adminMessageService: AdminMessageService,
+    private adminProductImageService: AdminProductImageService
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class AdminProductUpdateComponent {
 
   submit() {
     let id = Number(this.router.snapshot.params['id']);
-    this.adminProductUpdateService.savePost(id, {
+    this.adminProductUpdateService.updateProduct(id, {
       name: this.productForm.get('name')?.value,
       description: this.productForm.get('description')?.value,
       fullDescription: this.productForm.get('fullDescription')?.value,
@@ -74,7 +76,7 @@ export class AdminProductUpdateComponent {
   uploadFile() {
     let formData = new FormData();
     formData.append('file', this.imageForm.get('file')?.value);
-    this.adminProductUpdateService.uploadImage(formData)
+    this.adminProductImageService.uploadImage(formData)
       .subscribe(result => this.image = result.filename);
   }
 
