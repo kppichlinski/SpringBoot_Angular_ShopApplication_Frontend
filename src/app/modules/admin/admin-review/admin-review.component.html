@@ -1,0 +1,35 @@
+<h1>Customer Reviews</h1>
+<table mat-table [dataSource]="data">
+    <ng-container matColumnDef="authorName">
+        <th mat-header-cell *matHeaderCellDef> Author </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.authorName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef> Content </th>
+        <td mat-cell *matCellDef="let element"> {{element.content}}
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="moderated">
+        <th mat-header-cell *matHeaderCellDef> Moderated </th>
+        <td mat-cell *matCellDef="let element">
+            <div *ngIf="element?.moderated">Already moderated</div>
+            <div *ngIf="!element?.moderated">Waiting for moderation</div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <div flexLayout="row">
+                <button mat-icon-button (click)="confirmModerate(element)">
+                    <mat-icon color="primary">done</mat-icon>
+                </button>
+                <button mat-icon-button (click)="confirmDelete(element)" fxFlex>
+                    <mat-icon color="warn">delete</mat-icon>
+                </button>
+            </div>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
+</table>
