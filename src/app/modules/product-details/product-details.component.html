@@ -13,7 +13,7 @@
             <div fxLayout="row" fxFlexAlign="end">
             </div>
                 <span class="price">{{product?.price}} {{product?.currency}}</span>
-            <button mat-flat-button color="warn">Add to cart</button>
+            <button mat-flat-button color="warn" routerLink="/cart" [queryParams]="{productId: product?.id}">Add to cart</button>
         </div>
     </div>
     <div class="description">
