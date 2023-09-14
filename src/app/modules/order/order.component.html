@@ -5,6 +5,10 @@
     <div>Place date: {{orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
     <div>Status: {{getStatus(orderSummary.status)}}</div>
     <div>Value: {{orderSummary.grossValue}} PLN</div>
+    <div *ngIf="orderSummary.payment.note">Payment: 
+        <br>
+        <span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span>
+    </div>
 </div>
 
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length <= 0">
@@ -112,10 +116,17 @@
                     <div>
                         <h2>Shipment</h2>
                         <mat-radio-group fxLayout="column" formControlName="shipment">
-                            <mat-radio-button *ngFor="let shipment of initData?.shipments"
+                            <mat-radio-button classs="shipmentRadioButton" *ngFor="let shipment of initData?.shipments"
                                 [checked]="shipment.defaultShipment" [value]="shipment">
                                 <span class="shipment-1">{{shipment.name}}</span>
                                 <span class="shipment-2">{{shipment.price}} PLN</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <h2>Payment</h2>
+                        <mat-radio-group fxLayout="column" formControlName="payment">
+                            <mat-radio-button classs="paymentRadioButton" *ngFor="let payment of initData?.payments"
+                                [checked]="payment.defaultPayment" [value]="payment">
+                                {{payment.name}}
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
