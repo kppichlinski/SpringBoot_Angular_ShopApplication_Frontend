@@ -18,6 +18,8 @@ import { ProductDetailsComponent } from './modules/product-details/product-detai
 import { ProductComponent } from './modules/product/product.component';
 import { CartComponent } from './modules/cart/cart.component';
 import { OrderComponent } from './modules/order/order.component';
+import { AdminOrderComponent } from './modules/admin/admin-order/admin-order.component';
+import { AdminOrderUpdateComponent } from './modules/admin/admin-order/admin-order-update/admin-order-update.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,8 @@ const routes: Routes = [
       { path: 'admin/categories/add', component: AdminCategoryAddComponent },
       { path: 'admin/categories/update/:id', component: AdminCategoryUpdateComponent },
       { path: 'admin/reviews', component: AdminReviewComponent},
+      { path: 'admin/orders', component: AdminOrderComponent},
+      { path: 'admin/orders/update/:id', component: AdminOrderUpdateComponent }
     ]
   },
 ];

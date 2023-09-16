@@ -22,12 +22,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getCountProducts();
     this.cartIconService.subject
-      .subscribe(counter => this.cartProductCounter = String(counter > 0 ? counter : ""));
+      .subscribe(counter => this.cartProductCounter = String(Number(counter) > 0 ? counter : ""));
   }
 
   getCountProducts() {
     let cartId = Number(this.cookieService.get("cartId"));
     this.headerService.getCountProducts(cartId)
-      .subscribe(counter => this.cartProductCounter = String(counter > 0 ? counter : ""));
+      .subscribe(counter => this.cartProductCounter = String(Number(counter) > 0 ? counter : ""));
   }
 }

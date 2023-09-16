@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderSummary } from './model/orderSummary';
 import { OrderDto } from './model/orderDto';
 import { InitData } from './model/initData';
+import { CartIconService } from '../common/service/cart-icon.service';
 
 @Component({
   selector: 'app-order',
@@ -27,7 +28,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cartIconService: CartIconService
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +74,7 @@ export class OrderComponent implements OnInit {
           this.orderSummary = orderSummary;
           this.cookieService.delete("cartId");
           this.errorMessage = false;
+          this.cartIconService.cartChanged(0);
           },
           error: err => this.errorMessage = true
       });
