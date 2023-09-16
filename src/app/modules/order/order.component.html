@@ -135,6 +135,9 @@
                     <div class="orderTotal"> Total amount:
                         <span class="orderTotalValue">{{cartSummary.summary.grossValue + shipment?.value.price}} PLN</span>
                     </div>
+                    <div *ngIf="errorMessage" class="errorMessage" fxLayoutAlign="end start">
+                        Something went wrong. Try again later.
+                    </div>
                 </div>
                 <div fxLayoutAlign="end start">
                     <button mat-flat-button color="accent" class="orderButton">Order and pay</button>
