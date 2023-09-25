@@ -9,7 +9,10 @@
         <div fxFlex class="sidebar">
             <mat-selection-list [multiple]="false">
                 <mat-list-option><a routerLink="/admin">Dashboard</a></mat-list-option>
-                <mat-list-option><a routerLink="/admin/orders">Zamówienia</a></mat-list-option>
+                <mat-list-option>
+                    <a routerLink="/admin/orders">Orders</a>
+                    <span class="subMenuLink"> | <a routerLink="/admin/orders/export">Export</a></span>
+                </mat-list-option>
                 <mat-list-option><a routerLink="/admin/products">Products</a></mat-list-option>
                 <mat-list-option><a routerLink="/admin/categories">Categories</a></mat-list-option>
                 <mat-list-option><a routerLink="/admin/reviews">Reviews</a></mat-list-option>
