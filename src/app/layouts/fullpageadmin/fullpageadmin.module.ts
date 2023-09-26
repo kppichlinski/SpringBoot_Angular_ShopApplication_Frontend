@@ -20,6 +20,8 @@ import { AdminReviewComponent } from 'src/app/modules/admin/admin-review/admin-r
 import { AdminOrderUpdateComponent } from 'src/app/modules/admin/admin-order/admin-order-update/admin-order-update.component';
 import { AdminOrderComponent } from 'src/app/modules/admin/admin-order/admin-order.component';
 import { AdminOrderExportComponent } from 'src/app/modules/admin/admin-order/admin-order-export/admin-order-export.component';
+import { AdminOrderStatsComponent } from 'src/app/modules/admin/admin-order/admin-order-stats/admin-order-stats.component';
+import { Chart } from 'chart.js';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { AdminOrderExportComponent } from 'src/app/modules/admin/admin-order/adm
     AdminReviewComponent,
     AdminOrderComponent,
     AdminOrderUpdateComponent,
-    AdminOrderExportComponent
+    AdminOrderExportComponent,
+    AdminOrderStatsComponent
   ],
   imports: [
     CommonModule,
