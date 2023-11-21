@@ -22,6 +22,7 @@ import { AdminOrderComponent } from 'src/app/modules/admin/admin-order/admin-ord
 import { AdminOrderExportComponent } from 'src/app/modules/admin/admin-order/admin-order-export/admin-order-export.component';
 import { AdminOrderStatsComponent } from 'src/app/modules/admin/admin-order/admin-order-stats/admin-order-stats.component';
 import { Chart } from 'chart.js';
+import { AdminLoginComponent } from 'src/app/modules/admin/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
